@@ -5,7 +5,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.0
-
     steps:
       - uses: actions/checkout@v2           
       - name: generating appwise swagger docs
