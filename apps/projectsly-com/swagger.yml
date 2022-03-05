@@ -1,0 +1,395 @@
+definitions:
+  Apps:
+    properties:
+      api:
+        description: Comma Separated inputs for the app for user data
+        type: string
+      category:
+        description: Category under which the application belongs
+        type: string
+      description:
+        description: Description of the app
+        type: string
+      name:
+        description: Name of the application
+        type: string
+    type: object
+externalDocs:
+  description: Signup for a free account
+  url: https://projectsly
+host: api.dev.500apps.com
+info:
+  contact:
+    email: apiteam@unified.ly
+  description: Projectsly provides simple interface to interact with applications .
+  termsOfService: https://projectsly/terms/
+  title: Projectsly API
+  version: 1.0.0
+  x-logo:
+    url: "https://projectsly.com/images/logo.svg"
+    backgroundColor: "#FFFFFF"
+    altText: "Projectsly"
+schemes:
+  - https
+  - http
+securityDefinitions:
+    Authorization:
+      in: header
+      name: Authorization
+      type: apiKey
+swagger: '2.0'
+tags:
+  - description: Everything about categories and apps supported by projectsly
+    externalDocs:
+      description: Find out more
+      url: https://projectsly
+    name: projectsly
+paths:
+  /v2/users/domain/manage_my_apps:
+    get:
+      parameters:
+        - in: query
+          name: limit
+          required: true
+          default: 500
+          type: string
+        - in: query
+          name: where
+          default: name='projectsly' and is_active=1
+          required: true
+          
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful
+      security:
+        - Authorization: []
+      tags:
+        - projectsly
+  /v2sp/projects/add-project:
+    post:
+      parameters:
+        - in: body
+          name: request_test
+          schema:
+            properties:
+              name:
+                default: <name>
+                required: true
+                type: string
+              icon:
+                default: fe fe-activity
+                required: true
+                type: string
+              color:
+                default: "#1CA085"
+                required: true
+                type: string
+              member_id:
+                default: [user id's with comma seperated]
+                required: true
+                type: array
+              is_public:
+                default: "0"
+                required: true
+                type: string
+                enum: [0,1]
+          description: >
+            is_public:
+             * `1` - To make project public
+             * `0` - To make project private 
+          required: true
+          type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful
+      security:
+        - Authorization: []
+      tags:
+        - projectsly
+  /v2sp/projects/update-project:
+    put:
+      parameters:
+        - in: body
+          name: request_test
+          schema:
+            properties:
+              id:
+                default: <id>
+                required: true
+                type: string
+              name:
+                default: <project name>
+                required: true
+                type: string
+              icon:
+                default: fe fe-activity
+                required: true
+                type: string
+              color:
+                default: "#1CA085"
+                required: true
+                type: string
+              description:
+                default: null
+                required: true
+                type: string
+              member_id:
+                default: [user id's with comma seperated]
+                required: true
+                type: array
+              is_public:
+                default: "0"
+                required: true
+                type: string
+                enum: [0,1]
+          description: >
+            is_public:
+             * `1` - To make project public
+             * `0` - To make project private 
+          required: true
+          type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful
+      security:
+        - Authorization: []
+      tags:
+        - projectsly
+  /v2/projects/projects/{id}:
+    delete:
+      parameters:
+        - name: id
+          in: path
+          description: Project id
+          type: integer
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful
+      security:
+        - Authorization: []
+      tags:
+        - projectsly
+  /v2/projects/domain/add_project:
+    get:
+      parameters:
+        - in: query
+          name: limit
+          required: true
+        - in: query
+          name: order_by
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful
+      security:
+        - Authorization: []
+      tags:
+        - projectsly
+  /v2/projects/groups:
+    post:
+      parameters:
+        - in: body
+          name: request_test
+          schema:
+            properties:
+              name:
+                default: "<category name>"
+                required: true
+                type: string
+              project_id:
+                default: "<project id>"
+                required: true
+                type: string
+          required: true
+          type: object
+      security:
+        - Authorization: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful
+      tags:
+        - projectsly
+  /v2/projects/groups/{id}:
+    delete:
+      parameters:
+        - name: id
+          in: path
+          description: Group/Category id
+          type: integer
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful
+      security:
+        - Authorization: []
+      tags:
+        - projectsly
+  /v2/projects/tasks:
+    post:
+      parameters:
+        - in: body
+          name: request_test
+          schema:
+            properties:
+              name:
+                default: <task name>
+                required: true
+                type: string
+              description:
+                default: null
+                required: true
+                type: string
+              group_id:
+                default: null
+                required: true
+                type: string
+              due_date:
+                default: null
+                required: true
+                type: date
+              assignee_id:
+                default: "<user id>"
+                required: true
+                type: string
+              project_id:
+                default: "<project id>"
+                required: true
+                type: string
+              priority_id:
+                default: "2"
+                required: true
+                type: string
+              status_id:
+                default: "1"
+                required: true
+                type: string
+              actual_hours:
+                default: "0"
+                required: true
+                type: string
+              estimated_hours:
+                default: "0"
+                required: true
+                type: string 
+          description: >
+            priority_id:
+             * `1` - High priority,`2` - Medium priority,`3` - Low prority
+             >
+             status_id:
+             * `1` - New status,`2` - On going,`3` - Completed
+             >
+             due_date: format should be `YYYY-MM-DD`
+          required: true
+          type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful
+      security:
+        - Authorization: []
+      tags:
+        - projectsly
+  /v2/projects/tasks/{id}:
+    put:
+      parameters:
+        - name: id
+          in: path
+          description: Task id
+          type: integer
+          required: true
+        - in: body
+          name: request_test
+          schema:
+            properties:
+              name:
+                default: <task name>
+                required: true
+                type: string
+              description:
+                default: null
+                required: true
+                type: string
+              due_date:
+                default: null
+                required: true
+                type: date
+              assignee_id:
+                default: "<user id>"
+                required: true
+                type: string
+              priority_id:
+                default: "2"
+                required: true
+                type: string
+              status_id:
+                default: "1"
+                required: true
+                type: string
+              actual_hours:
+                default: "0"
+                required: true
+                type: string
+              estimated_hours:
+                default: "0"
+                required: true
+                type: string 
+          description: >
+            priority_id:
+             * `1` - High priority,`2` - Medium priority,`3` - Low prority
+             >
+             status_id:
+             * `1` - New status,`2` - On going,`3` - Completed
+             >
+             due_date: format should be `YYYY-MM-DD`
+          required: true
+          type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful
+      security:
+        - Authorization: []    
+      tags:
+        - projectsly
+    delete:
+      parameters:
+        - name: id
+          in: path
+          description: Task id
+          type: integer
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful
+      security:
+        - Authorization: []
+      tags:
+        - projectsly
+
+
+
+
+
+
+
+
+

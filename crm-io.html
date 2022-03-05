@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Api Documentation - crm.io</title>
+<link rel="shortcut icon" type="image/x-icon" href="https://crm.io/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.0/swagger-ui.css" >
+  <link rel="stylesheet" type="text/css" href="/lib/css/blue-brand.css" >
+  <style>
+    html
+    {
+      box-sizing: border-box;
+      overflow: -moz-scrollbars-vertical;
+      overflow-y: scroll;
+    }
+    *,
+    *:before,
+    *:after
+    {
+      box-sizing: inherit;
+    }
+    body {
+      margin:0;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+<div id="swagger-ui"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.0/swagger-ui-bundle.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.0/swagger-ui-standalone-preset.js"> </script>
+<script>
+window.onload = function() {
+  var spec = {"definitions": {"Apps": {"properties": {"api": {"description": "Comma Separated inputs for the app for user data", "type": "string"}, "category": {"description": "Category under which the application belongs", "type": "string"}, "description": {"description": "Description of the app", "type": "string"}, "name": {"description": "Name of the application", "type": "string"}}, "type": "object"}}, "externalDocs": {"description": "Signup for a free account", "url": "https://crm.io"}, "host": "api.dev.500apps.com", "info": {"contact": {"email": "apiteam@unified.ly"}, "description": "CRM provides simple interface to interact with customers .", "termsOfService": "https://crm/terms/", "title": "CRM.io API", "version": "1.0.0"}, "schemes": ["https", "http"], "securityDefinitions": {"Authorization": {"in": "header", "name": "Authorization", "type": "apiKey"}}, "swagger": "2.0", "tags": [{"description": "Everything about categories and apps supported by projectsly", "externalDocs": {"description": "Find out more", "url": "https://crm.io"}, "name": "CRM.io"}], "paths": {"/v2/users/domain/manage_my_apps": {"get": {"parameters": [{"in": "query", "name": "limit", "required": true, "default": 500, "type": "string"}, {"in": "query", "name": "where", "default": "name='CRM.io' and is_active=1", "required": true}], "produces": ["application/json"], "responses": {"200": {"description": "successful"}}, "security": [{"Authorization": []}], "tags": ["Portal Members"]}}, "/v2/leads_details": {"get": {"parameters": [{"in": "query", "name": "limit", "default": 50, "required": true}, {"in": "query", "name": "order_by", "default": "created_date desc", "required": true}], "produces": ["application/json"], "responses": {"200": {"description": "successful"}}, "security": [{"Authorization": []}], "tags": ["Leads"]}}, "/v2sp/crm/add-contact": {"post": {"parameters": [{"in": "body", "name": "request_test", "schema": {"properties": {"first_name": {"default": "<first_name>", "required": true, "type": "string"}, "is_contacted": {"default": "0", "required": true, "type": "string"}, "lead_stage": {"default": "Anonymous", "required": true, "type": "string"}, "emails": {"default": [{"email_type": "", "email_value": "email", "is_primary": "1", "contact_id": "{hb contact_data.0.GENERATED_KEY hb}"}], "required": true, "type": "array"}, "phones_data": {"default": [{"is_primary": true, "phone_type": "", "country_code": "", "phone": ""}], "required": true, "type": "array"}, "networks_data": {"default": [{"network_type": "", "network_URL": ""}], "required": true, "type": "array"}, "owner_id": {"default": "<user_id>", "required": true, "type": "string"}, "primary_email": {"default": "<email>", "required": true, "type": "string"}, "ce_data": {"default": [{"email_type": "", "email_value": "ftrstname@yopmail.com", "is_primary": "1", "contact_id": "{hb contact_data.0.GENERATED_KEY hb}"}], "required": true, "type": "array"}}}, "required": true, "type": "object"}], "produces": ["application/json"], "responses": {"200": {"description": "successful"}}, "security": [{"Authorization": []}], "tags": ["Leads"]}}, "/v2sp/crm/update-contact": {"put": {"parameters": [{"in": "body", "name": "request_test", "schema": {"properties": {"emails": {"default": [{"email_type": "", "email_value": "fggh@yyop.com", "is_primary": "1", "contact_id": "25165"}], "required": true, "type": "array"}, "phones_data": {"default": [{"is_primary": true, "phone_type": "Work", "country_code": "AL", "phone": "21454589", "isValid": true}], "required": true, "type": "array"}, "networks_data": {"default": [{"network_type": "Facebook", "network_URL": "dfsd"}], "required": true, "type": "array"}, "is_contacted": {"default": "0", "required": true, "type": "string"}, "owner_id": {"default": "<owner_id>", "required": true, "type": "string"}, "primary_email": {"default": "<email>", "required": true, "type": "string"}, "id": {"default": "<id>", "required": true, "type": "string"}, "country_code": {"default": "IN", "required": true, "type": "string"}, "primary_phone": {"default": "1234567890", "required": true, "type": "string"}, "phone_type": {"default": "work", "required": true, "type": "string"}, "required": true, "type": "object", "Phones": {"default": [{"country_code": "AL", "phone": "21454589", "phone_type": "Work", "is_primary": true, "contact_id": "25165"}], "required": true, "type": "array"}, "networks": {"default": [{"network_URL": "dfsd", "network_type": "Facebook", "contact_id": "25165"}], "required": true, "type": "array"}}}}], "produces": ["application/json"], "responses": {"200": {"description": "successful"}}, "security": [{"Authorization": []}], "tags": ["Leads"]}}, "/v2/contacts": {"delete": {"parameters": [{"in": "query", "description": "Contact id", "name": "where", "default": "id='id'", "required": true}], "produces": ["application/json"], "responses": {"200": {"description": "successful"}}, "security": [{"Authorization": []}], "tags": ["Leads"]}}, "/v2/activity": {"get": {"parameters": [{"in": "query", "description": "Contact id", "name": "where", "default": "entity_id='id'", "required": true}], "produces": ["application/json"], "responses": {"200": {"description": "successful"}}, "security": [{"Authorization": []}], "tags": ["Activity"]}}}};
+  // Build a system
+  const ui = SwaggerUIBundle({
+    spec: spec,
+    dom_id: '#swagger-ui',
+    deepLinking: true,
+    presets: [
+      SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset
+    ],
+    plugins: [
+      SwaggerUIBundle.plugins.DownloadUrl
+    ],
+    layout: "StandaloneLayout"
+  })
+  window.ui = ui
+}
+</script>
+</body>
+</html>
